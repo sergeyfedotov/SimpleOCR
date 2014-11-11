@@ -64,4 +64,12 @@ class Glyph
     {
         return $this->character;
     }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->character;
+    }
 }
