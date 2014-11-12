@@ -23,6 +23,11 @@ class BitmapFont implements FontInterface
     protected $extractor;
 
     /**
+     * @var array
+     */
+    protected $characters = array();
+
+    /**
      * @var GlyphCollection
      */
     protected $glyphs;
@@ -31,10 +36,11 @@ class BitmapFont implements FontInterface
      * @param Bitmap $bitmap
      * @param ExtractorInterface $extractor
      */
-    public function __construct(Bitmap $bitmap, ExtractorInterface $extractor)
+    public function __construct(Bitmap $bitmap, ExtractorInterface $extractor, array $characters)
     {
         $this->bitmap = $bitmap;
         $this->extractor = $extractor;
+        $this->characters = $characters;
         $this->extractGlyphs();
     }
 
@@ -44,6 +50,10 @@ class BitmapFont implements FontInterface
     protected function extractGlyphs()
     {
         $this->glyphs = $this->extractor->extractGlyphs($this->bitmap);
+        
+        foreach ($this->glyphs as $i => $glyph) {
+            $glyph->setCharacter($this->characters[$i]);
+        }
     }
 
     /**
@@ -60,6 +70,14 @@ class BitmapFont implements FontInterface
     public function getExtractor()
     {
         return $this->extractor;
+    }
+
+    /**
+     * @return array
+     */
+    public function getCharacters()
+    {
+        return $this->characters;
     }
 
     /**
