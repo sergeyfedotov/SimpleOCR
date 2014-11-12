@@ -19,5 +19,5 @@ $recognizer = new Recognizer(
     new SimpleExtractor(),
     new StrictRecognizer()
 );
-$recognizer->recognize('input.png');
+$recognizer->recognize(Bitmap::createFromFile('input.png'));
 ```
