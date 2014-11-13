@@ -2,6 +2,7 @@ SimpleOCR
 =========
 
 ```php
+<?php
 use Fsv\SimpleOcr\BitmapFactory;
 use Fsv\SimpleOcr\Recognizer;
 use Fsv\SimpleOcr\Comparator\StrictComparator;
