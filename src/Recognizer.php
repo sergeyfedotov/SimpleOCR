@@ -69,10 +69,10 @@ class Recognizer
     {
         $glyphs = $this->extractor->extractGlyphs($image);
 
-        foreach ($glyphs as $glyph1) {
-            foreach ($this->font->getGlyphs() as $glyph2) {
-                if ($this->comparator->compare($glyph1, $glyph2)) {
-                    $glyph1->setCharacter($glyph2->getCharacter());
+        foreach ($glyphs as $firstGlyph) {
+            foreach ($this->font->getGlyphs() as $secondGlyph) {
+                if ($this->comparator->compare($firstGlyph, $secondGlyph)) {
+                    $firstGlyph->setCharacter($secondGlyph->getCharacter());
                 }
             }
         }

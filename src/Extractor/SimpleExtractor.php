@@ -22,6 +22,10 @@ class SimpleExtractor implements ExtractorInterface
         $glyphs =  new GlyphCollection();
 
         foreach ($this->extractLines($bitmap) as $lineNum => $lineBounds) {
+            if ($lineNum > 0) {
+                $glyphs->add(new Glyph(new Bitmap(1, 1), "\n"));
+            }
+
             foreach (
                 $this->extractLineCharacters($bitmap, $lineBounds)
                     as $characterBounds
@@ -94,9 +98,9 @@ class SimpleExtractor implements ExtractorInterface
     {
         $prevLevel = 0;
         $characterIndex = 0;
-        $lastX = $bitmap->getWidth() - 1;
         $yMin = $lineBounds[1];
         $yMax = $lineBounds[0];
+        $lastX = $bitmap->getWidth() - 1;
         $bounds = array();
 
         for ($x = 0; $x < $bitmap->getWidth(); $x++) {
@@ -121,7 +125,9 @@ class SimpleExtractor implements ExtractorInterface
             ) {
                 $bounds[$characterIndex][1] = $x;
                 $bounds[$characterIndex][2] = $yMin;
-                $bounds[$characterIndex][3] = $yMax;
+                $bounds[$characterIndex][3] = $yMax + 1;
+                $yMin = $lineBounds[1];
+                $yMax = $lineBounds[0];
                 $characterIndex++;
             }
 
