@@ -8,6 +8,11 @@ namespace Fsv\SimpleOcr;
 class Glyph
 {
     /**
+     *
+     */
+    const NOT_RECOGNIZED_CHARACTER = '';
+
+    /**
      * @var Bitmap
      */
     protected $bitmap;
@@ -21,8 +26,10 @@ class Glyph
      * @param Bitmap $bitmap
      * @param string $character
      */
-    public function __construct(Bitmap $bitmap, $character = '')
-    {
+    public function __construct(
+        Bitmap $bitmap,
+        $character = self::NOT_RECOGNIZED_CHARACTER
+    ) {
         $this->bitmap = $bitmap;
         $this->character = $character;
     }
