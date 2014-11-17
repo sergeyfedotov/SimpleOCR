@@ -20,3 +20,5 @@ $recognizer = new Recognizer(
 );
 print $recognizer->recognize(BitmapFactory::createFromFile('test.png'));
 ```
+
+![](http://i.sergey89.ru/546a5e26c7d79.png)
